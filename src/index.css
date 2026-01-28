@@ -1,0 +1,110 @@
+body, #root {
+  min-height: 100vh;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+}
+
+
+/* ============================
+   ADMIN SIDEBAR ONLY
+============================ */
+
+/* Sidebar Container */
+.sidebar {
+  width: 240px;
+  min-height: 100vh;
+  background: linear-gradient(180deg, #0f172a, #1e293b);
+  padding: 25px 18px;
+  box-shadow: 4px 0 15px rgba(0, 0, 0, 0.25);
+}
+
+/* Sidebar Menu */
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Title */
+.sidebar h2 {
+  color: #ffffff;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 25px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* Menu Items */
+.sidebar .nav-item {
+  margin-bottom: 10px;
+}
+
+/* Links */
+.sidebar .nav-link {
+  display: block;
+  padding: 12px 15px;
+  color: #cbd5e1;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+/* Hover */
+.sidebar .nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  transform: translateX(5px);
+}
+
+/* Active */
+.sidebar .nav-link.active {
+  background: linear-gradient(135deg, #2563eb, #3b82f6);
+  color: #ffffff;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.5);
+}
+
+/* ============================
+   LOGOUT BUTTON
+============================ */
+
+.sidebar .btn {
+  width: 100%;
+  margin-top: auto;
+  padding: 12px 0;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Logout Button */
+.sidebar .btn-danger {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  color: #ffffff;
+  box-shadow: 0 6px 15px rgba(239, 68, 68, 0.4);
+}
+
+/* Hover */
+.sidebar .btn-danger:hover {
+  background: linear-gradient(135deg, #dc2626, #b91c1c);
+  box-shadow: 0 10px 25px rgba(239, 68, 68, 0.6);
+  transform: translateY(-2px);
+}
+
+/* Click */
+.sidebar .btn-danger:active {
+  transform: scale(0.95);
+}
