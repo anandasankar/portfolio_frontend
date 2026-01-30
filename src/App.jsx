@@ -11,6 +11,7 @@ import AllAppointments from "./pages/Appointments/AllAppointments";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getUser } from "./redux/actions/authActions";
+import UserDetails from "./pages/user/UserDetails";
 
 function App() {
   const dispatch = useDispatch();
@@ -30,6 +31,7 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/home" element={<Home />} />
         <Route path="/all-users" element={<AllUsers />} />
+        <Route path="/user/details/:id" element={<UserDetails />} />
         <Route path="/all-doctors" element={<AllDoctors />} />
         <Route path="/doctor-details/:id" element={<DoctorDetails />} />
         <Route path="/all-appointments" element={<AllAppointments />} />

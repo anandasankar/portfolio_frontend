@@ -1,12 +1,12 @@
 import React from "react";
 import Layout from "../../components/Layout/Layout";
 
-const DoctorDetails = () => {
+const UserDetails = () => {
   return (
     <Layout>
-      <h1>Doctor page details</h1>
+      <h1>User Details</h1>
     </Layout>
   );
 };
 
-export default DoctorDetails;
+export default UserDetails;
