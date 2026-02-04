@@ -19,7 +19,7 @@ export const login = createAsyncThunk(
   },
 );
 
-export const getUser = createAsyncThunk("auth/getUser", async (_, thunkApi) => {
+export const getUser = createAsyncThunk("auth/me", async (_, thunkApi) => {
   try {
     const res = await API.get("/me/user");
 

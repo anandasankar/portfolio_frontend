@@ -86,6 +86,7 @@ const Login = () => {
                   placeholder="Enter password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  autoComplete="new-password"
                 />
 
                 {/* Eye Icon */}
