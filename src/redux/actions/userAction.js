@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import API from "../../api/Api";
+import API from "../../api/apiAxios";
 
 // Get All Users
 export const getAllUser = createAsyncThunk(
