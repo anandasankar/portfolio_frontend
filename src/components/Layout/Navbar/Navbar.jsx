@@ -6,15 +6,16 @@ const Navbar = () => {
 
   const [scrolled, setScrolled] = useState(false);
 
+  const [menuOpen, setMenuOpen] = useState(false);
+
   useEffect(() => {
     document.body.className = theme;
+
     localStorage.setItem("theme", theme);
   }, [theme]);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
+    const handleScroll = () => setScrolled(window.scrollY > 20);
 
     window.addEventListener("scroll", handleScroll);
 
@@ -23,6 +24,14 @@ const Navbar = () => {
 
   const toggleTheme = () => {
     setTheme(theme === "dark" ? "light" : "dark");
+  };
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
+  const closeMenu = () => {
+    setMenuOpen(false);
   };
 
   return (
@@ -36,47 +45,50 @@ const Navbar = () => {
           {"<Ananda.dev />"}
         </NavLink>
 
-        {/* Mobile button */}
+        {/* Toggle */}
 
         <button
-          className="navbar-toggler"
+          className={`navbar-toggler custom-toggler ${menuOpen ? "open" : ""}`}
           type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#nav"
+          onClick={toggleMenu}
         >
-          <i className="bi bi-list text-info fs-1"></i>
+          <span></span>
+
+          <span></span>
+
+          <span></span>
         </button>
 
         {/* Menu */}
 
-        <div className="collapse navbar-collapse" id="nav">
+        <div className={`collapse navbar-collapse ${menuOpen ? "show" : ""}`}>
           <ul className="navbar-nav ms-auto align-items-center">
             <li className="nav-item">
-              <NavLink className="nav-link" to="/">
+              <NavLink onClick={closeMenu} className="nav-link" to="/">
                 Home
               </NavLink>
             </li>
 
             <li className="nav-item">
-              <NavLink className="nav-link" to="/about">
+              <NavLink onClick={closeMenu} className="nav-link" to="/about">
                 About
               </NavLink>
             </li>
 
             <li className="nav-item">
-              <NavLink className="nav-link" to="/skill">
+              <NavLink onClick={closeMenu} className="nav-link" to="/projects">
                 Projects
               </NavLink>
             </li>
 
             <li className="nav-item">
-              <NavLink className="nav-link" to="/contact">
+              <NavLink onClick={closeMenu} className="nav-link" to="/contact">
                 Contact
               </NavLink>
             </li>
 
             <li className="nav-item mt-3 mt-lg-0 ms-lg-3">
-              <button onClick={toggleTheme} className="btn theme-btn">
+              <button onClick={toggleTheme} className="theme-btn">
                 {theme === "dark" ? "☀" : "🌙"}
               </button>
             </li>

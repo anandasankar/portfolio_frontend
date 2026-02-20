@@ -3,33 +3,30 @@ import React from "react";
 const Footer = () => {
   return (
     <footer
-      className="pt-5 pb-4 mt-5"
+      className="bg-dark text-light pt-5 pb-4 mt-5"
       style={{
         background: "rgba(2,6,23,0.95)",
         fontFamily: "'JetBrains Mono', monospace",
       }}
     >
       <div className="container">
-        <div className="row gy-4 text-center text-md-start">
-          {/* Logo & About */}
+        <div className="row text-center text-md-start">
+          {/* Logo and About */}
 
-          <div className="col-12 col-md-4">
+          <div className="col-12 col-md-4 mb-4 mb-md-0 d-flex flex-column align-items-center align-items-md-start">
             <h5
               className="fw-bold mb-3"
               style={{
                 color: "#38bdf8",
-                fontSize: "20px",
               }}
             >
               {"<Ananda.dev />"}
             </h5>
 
             <p
-              className="text-secondary"
+              className="text-secondary small"
               style={{
-                fontSize: "14px",
-                lineHeight: "1.7",
-                maxWidth: "320px",
+                maxWidth: "300px",
               }}
             >
               Backend Developer experienced in building scalable APIs,
@@ -39,46 +36,33 @@ const Footer = () => {
 
           {/* Quick Links */}
 
-          <div className="col-12 col-md-4">
-            <h6
-              className="fw-semibold mb-3"
-              style={{
-                color: "#38bdf8",
-                fontSize: "16px",
-              }}
-            >
+          <div className="col-12 col-md-4 mb-4 mb-md-0">
+            <h6 className="fw-semibold mb-3" style={{ color: "#38bdf8" }}>
               Quick Links
             </h6>
 
             <div className="d-flex flex-column gap-2">
-              <a
-                href="/"
-                className="text-secondary text-decoration-none"
-                style={{ fontSize: "14px" }}
-              >
+              <a href="/" className="text-secondary text-decoration-none small">
                 Home
               </a>
 
               <a
                 href="/about"
-                className="text-secondary text-decoration-none"
-                style={{ fontSize: "14px" }}
+                className="text-secondary text-decoration-none small"
               >
                 About
               </a>
 
               <a
-                href="/skill"
-                className="text-secondary text-decoration-none"
-                style={{ fontSize: "14px" }}
+                href="/projects"
+                className="text-secondary text-decoration-none small"
               >
                 Projects
               </a>
 
               <a
                 href="/contact"
-                className="text-secondary text-decoration-none"
-                style={{ fontSize: "14px" }}
+                className="text-secondary text-decoration-none small"
               >
                 Contact
               </a>
@@ -88,17 +72,11 @@ const Footer = () => {
           {/* Connect */}
 
           <div className="col-12 col-md-4">
-            <h6
-              className="fw-semibold mb-3"
-              style={{
-                color: "#38bdf8",
-                fontSize: "16px",
-              }}
-            >
+            <h6 className="fw-semibold mb-3" style={{ color: "#38bdf8" }}>
               Connect
             </h6>
 
-            <div className="d-flex justify-content-center justify-content-md-start gap-3">
+            <div className="d-flex justify-content-center justify-content-md-start gap-4">
               <a href="#" className="text-secondary fs-5">
                 <i className="bi bi-github"></i>
               </a>
@@ -118,16 +96,13 @@ const Footer = () => {
           </div>
         </div>
 
+        {/* Divider */}
+
+        <hr className="border-secondary my-4" />
+
         {/* Bottom */}
 
-        <hr className="border-secondary mt-4" />
-
-        <div
-          className="text-center text-secondary"
-          style={{
-            fontSize: "13px",
-          }}
-        >
+        <div className="text-center text-secondary small">
           © {new Date().getFullYear()} Ananda Sankar | All rights reserved.
         </div>
       </div>
