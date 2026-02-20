@@ -1,0 +1,31 @@
+export const PROJECTS = [
+  {
+    title: "Game Management System",
+    subtitle: "Game Mano Pvt. Ltd. · 2025",
+    year: "2025",
+    icon: "bi-controller",
+    accent: "#ff9f43",
+    desc: "I developed a centralized admin backoffice for casino operations, enabling player management, affiliate systems, and campaign configuration. Built scalable REST APIs, implemented RBAC for secure access control, and integrated Redis, RabbitMQ, and Socket.IO for real-time and background processing.",
+    tags: [
+      "Node.js",
+      "TypeScript",
+      "PostgreSQL",
+      "Prisma",
+      "Redis",
+      "RabbitMQ",
+      "Socket.IO",
+      "AWS S3",
+      "BullMQ",
+      "Jest",
+    ],
+  },
+  {
+    title: "Employee Management Portal",
+    subtitle: "MicroSpark Software Solutions · 2023",
+    year: "2023",
+    icon: "bi-people-fill",
+    accent: "#00ffcc",
+    desc: "I developed backend APIs for an employee management system to handle user data, authentication, and internal workflows. Integrated Firebase notifications, SendGrid emails, and Swagger documentation while ensuring secure access, efficient performance, and smooth frontend integration.",
+    tags: ["Node.js", "MongoDB", "Firebase", "SendGrid", "Swagger", "REST API"],
+  },
+];

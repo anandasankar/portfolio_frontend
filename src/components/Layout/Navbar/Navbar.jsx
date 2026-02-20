@@ -1,100 +1,120 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
+import "./navbar.css";
+
+const NAV_LINKS = [
+  { to: "/", label: "Home", icon: "bi-house" },
+  { to: "/about", label: "About", icon: "bi-person" },
+  { to: "/projects", label: "Projects", icon: "bi-code-slash" },
+  { to: "/contact", label: "Contact", icon: "bi-envelope" },
+];
 
 const Navbar = () => {
-  const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
-
   const [scrolled, setScrolled] = useState(false);
-
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    document.body.className = theme;
-
-    localStorage.setItem("theme", theme);
-  }, [theme]);
-
-  useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
-
     window.addEventListener("scroll", handleScroll);
-
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const toggleTheme = () => {
-    setTheme(theme === "dark" ? "light" : "dark");
-  };
-
-  const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
-  };
-
-  const closeMenu = () => {
-    setMenuOpen(false);
-  };
+  const toggleMenu = () => setMenuOpen((prev) => !prev);
+  const closeMenu = () => setMenuOpen(false);
 
   return (
-    <nav
-      className={`navbar navbar-expand-lg fixed-top custom-navbar ${scrolled ? "scrolled" : ""}`}
-    >
-      <div className="container">
-        {/* Logo */}
+    <nav className={`cnav ${scrolled ? "cnav--scrolled" : ""}`}>
+      <div className="cnav__line" aria-hidden="true" />
 
-        <NavLink className="navbar-brand logo" to="/">
-          {"<Ananda.dev />"}
+      <div className="cnav__inner">
+        {/* Logo */}
+        <NavLink className="cnav__logo" to="/" onClick={closeMenu}>
+          <span className="cnav__logo-bracket">&lt;</span>
+          Ananda
+          <span className="cnav__logo-dot">.</span>
+          dev
+          <span className="cnav__logo-bracket">&nbsp;/&gt;</span>
         </NavLink>
 
-        {/* Toggle */}
+        {/* Desktop links */}
+        <ul className="cnav__links">
+          {NAV_LINKS.map(({ to, label, icon }) => (
+            <li key={to}>
+              <NavLink
+                className={({ isActive }) =>
+                  `cnav__link ${isActive ? "cnav__link--active" : ""}`
+                }
+                to={to}
+                onClick={closeMenu}
+                end={to === "/"}
+              >
+                <i className={`bi ${icon} cnav__link-icon`} />
+                {label}
+              </NavLink>
+            </li>
+          ))}
+        </ul>
 
-        <button
-          className={`navbar-toggler custom-toggler ${menuOpen ? "open" : ""}`}
-          type="button"
-          onClick={toggleMenu}
+        {/* CTA */}
+        <a
+          href="mailto:ananda@example.com"
+          className="cnav__cta"
+          onClick={closeMenu}
         >
-          <span></span>
+          <span>Hire Me</span>
+          <i className="bi bi-arrow-up-right" />
+        </a>
 
-          <span></span>
-
-          <span></span>
+        {/* Hamburger */}
+        <button
+          className={`cnav__burger ${menuOpen ? "cnav__burger--open" : ""}`}
+          onClick={toggleMenu}
+          aria-label="Toggle menu"
+          aria-expanded={menuOpen}
+        >
+          <span />
+          <span />
+          <span />
         </button>
-
-        {/* Menu */}
-
-        <div className={`collapse navbar-collapse ${menuOpen ? "show" : ""}`}>
-          <ul className="navbar-nav ms-auto align-items-center">
-            <li className="nav-item">
-              <NavLink onClick={closeMenu} className="nav-link" to="/">
-                Home
-              </NavLink>
-            </li>
-
-            <li className="nav-item">
-              <NavLink onClick={closeMenu} className="nav-link" to="/about">
-                About
-              </NavLink>
-            </li>
-
-            <li className="nav-item">
-              <NavLink onClick={closeMenu} className="nav-link" to="/projects">
-                Projects
-              </NavLink>
-            </li>
-
-            <li className="nav-item">
-              <NavLink onClick={closeMenu} className="nav-link" to="/contact">
-                Contact
-              </NavLink>
-            </li>
-
-            <li className="nav-item mt-3 mt-lg-0 ms-lg-3">
-              <button onClick={toggleTheme} className="theme-btn">
-                {theme === "dark" ? "☀" : "🌙"}
-              </button>
-            </li>
-          </ul>
-        </div>
       </div>
+
+      {/* Mobile drawer */}
+      <div className={`cnav__drawer ${menuOpen ? "cnav__drawer--open" : ""}`}>
+        <ul className="cnav__drawer-links">
+          {NAV_LINKS.map(({ to, label, icon }, i) => (
+            <li key={to} style={{ "--i": i }}>
+              <NavLink
+                className={({ isActive }) =>
+                  `cnav__drawer-link ${isActive ? "cnav__drawer-link--active" : ""}`
+                }
+                to={to}
+                onClick={closeMenu}
+                end={to === "/"}
+              >
+                <i className={`bi ${icon} cnav__drawer-icon`} />
+                {label}
+                <i className="bi bi-arrow-right cnav__drawer-arrow" />
+              </NavLink>
+            </li>
+          ))}
+        </ul>
+
+        <a
+          href="mailto:ananda@example.com"
+          className="cnav__drawer-cta"
+          onClick={closeMenu}
+        >
+          Hire Me <i className="bi bi-arrow-up-right" />
+        </a>
+      </div>
+
+      {menuOpen && (
+        <div
+          className="cnav__backdrop"
+          onClick={closeMenu}
+          aria-hidden="true"
+        />
+      )}
     </nav>
   );
 };

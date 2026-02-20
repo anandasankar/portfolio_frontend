@@ -1,0 +1,488 @@
+/* ─── CSS Variables ───────────────────────────────────────────── */
+:root {
+    --bg-base: #060d18;
+    --bg-surface: #0a1628;
+    --bg-card: #0d1e35;
+    --bg-card-hover: #112342;
+    --bg-elevated: #132849;
+
+    --cyan: #00d4ff;
+    --cyan-dim: rgba(0, 212, 255, 0.10);
+    --cyan-glow: rgba(0, 212, 255, 0.35);
+    --teal: #00ffcc;
+    --teal-dim: rgba(0, 255, 204, 0.10);
+
+    --text-primary: #e8f4ff;
+    --text-secondary: #8ba8c8;
+    --text-muted: #4a6580;
+
+    --border: rgba(0, 212, 255, 0.12);
+    --border-strong: rgba(0, 212, 255, 0.32);
+
+    --font-mono: 'Fira Code', monospace;
+    --font-body: 'DM Sans', sans-serif;
+
+    --radius-sm: 6px;
+    --radius-md: 14px;
+    --radius-lg: 20px;
+
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --shadow-card: 0 4px 32px rgba(0, 0, 0, 0.55), 0 0 0 1px var(--border);
+    --shadow-glow: 0 0 40px var(--cyan-glow);
+}
+
+/* ─── Base Reset ──────────────────────────────────────────────── */
+.projects-wrapper *,
+.projects-wrapper *::before,
+.projects-wrapper *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* ─── Section Wrapper ─────────────────────────────────────────── */
+.projects-wrapper {
+    position: relative;
+    min-height: 100vh;
+    background: var(--bg-base);
+    font-family: var(--font-body);
+    color: var(--text-primary);
+    padding: 5rem 0 6rem;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+/* ─── Decorative Grid Background ─────────────────────────────── */
+.projects-grid-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-image:
+        linear-gradient(rgba(0, 212, 255, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 212, 255, 0.035) 1px, transparent 1px);
+    background-size: 52px 52px;
+    pointer-events: none;
+    mask-image: radial-gradient(ellipse 90% 80% at 50% 40%, black 20%, transparent 100%);
+}
+
+/* ─── Ambient Glow Blobs ──────────────────────────────────────── */
+.projects-glow-tr {
+    position: absolute;
+    top: -150px;
+    right: -150px;
+    width: 580px;
+    height: 580px;
+    background: radial-gradient(circle, rgba(0, 212, 255, 0.10) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+    animation: pulseGlow 7s ease-in-out infinite alternate;
+}
+
+.projects-glow-bl {
+    position: absolute;
+    bottom: -120px;
+    left: -120px;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(0, 255, 204, 0.08) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+    animation: pulseGlow 9s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes pulseGlow {
+    from {
+        opacity: 0.5;
+        transform: scale(1);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1.15);
+    }
+}
+
+/* ─── Container ───────────────────────────────────────────────── */
+.projects-wrapper .container {
+    position: relative;
+    z-index: 1;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+/* ─── Badge ───────────────────────────────────────────────────── */
+.projects-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--cyan);
+    background: var(--cyan-dim);
+    border: 1px solid var(--border-strong);
+    border-radius: 20px;
+    padding: 0.3rem 0.9rem;
+    margin-bottom: 1rem;
+    text-transform: lowercase;
+    transition: var(--transition);
+}
+
+.projects-badge:hover {
+    background: rgba(0, 212, 255, 0.18);
+    box-shadow: 0 0 16px var(--cyan-glow);
+}
+
+/* ─── Hero Header ─────────────────────────────────────────────── */
+.projects-hero-title {
+    font-family: var(--font-mono);
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+}
+
+.projects-hero-title .cyan {
+    color: var(--cyan);
+    text-shadow: 0 0 28px var(--cyan-glow);
+}
+
+.projects-hero-desc {
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--text-secondary);
+    max-width: 560px;
+    margin: 0 auto;
+    line-height: 1.75;
+}
+
+/* ─── Section Title ───────────────────────────────────────────── */
+.projects-section-title {
+    font-family: var(--font-mono);
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    letter-spacing: 0.04em;
+    margin-top: 0.3rem;
+    margin-bottom: 0.5rem;
+}
+
+.projects-title-underline {
+    width: 36px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--cyan), var(--teal));
+    border-radius: 2px;
+    margin: 0 auto;
+    box-shadow: 0 0 10px var(--cyan-glow);
+}
+
+/* ─── Divider ─────────────────────────────────────────────────── */
+.projects-divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border-strong), transparent);
+    margin: 3rem 0;
+}
+
+/* ══════════════════════════════════════════
+   HORIZONTAL PROJECT CARD
+══════════════════════════════════════════ */
+.proj-card {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
+    transition: var(--transition);
+    gap: 0;
+}
+
+/* Left accent bar */
+.proj-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--proj-accent, var(--cyan));
+    border-radius: 3px 0 0 3px;
+    opacity: 0.6;
+    transition: var(--transition);
+}
+
+/* Shimmer overlay */
+.proj-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.03) 0%, transparent 50%);
+    opacity: 0;
+    transition: var(--transition);
+    pointer-events: none;
+    border-radius: inherit;
+}
+
+.proj-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(0, 212, 255, 0.28);
+    box-shadow:
+        0 12px 48px rgba(0, 0, 0, 0.6),
+        0 0 24px rgba(0, 212, 255, 0.12),
+        0 0 0 1px rgba(0, 212, 255, 0.18);
+}
+
+.proj-card:hover::before {
+    opacity: 1;
+}
+
+.proj-card:hover::after {
+    opacity: 1;
+}
+
+/* ─── Left Panel (Icon + Year) ────────────────────────────────── */
+.proj-card-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.75rem;
+    padding: 1.5rem 1.25rem;
+    border-right: 1px solid var(--border);
+    min-width: 80px;
+    background: rgba(0, 0, 0, 0.18);
+    flex-shrink: 0;
+}
+
+/* ─── Right Panel (Content) ───────────────────────────────────── */
+.proj-card-body {
+    display: flex;
+    flex-direction: column;
+    padding: 1.4rem 1.6rem;
+    flex: 1;
+    min-width: 0;
+}
+
+/* ─── Icon Wrap ───────────────────────────────────────────────── */
+.proj-icon-wrap {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-sm);
+    background: var(--cyan-dim);
+    border: 1px solid var(--border-strong);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.15rem;
+    color: var(--proj-accent, var(--cyan));
+    flex-shrink: 0;
+    transition: var(--transition);
+    box-shadow: 0 0 14px rgba(0, 212, 255, 0.08);
+}
+
+.proj-card:hover .proj-icon-wrap {
+    box-shadow: 0 0 22px var(--cyan-glow);
+    background: rgba(0, 212, 255, 0.16);
+}
+
+/* ─── Year Chip ───────────────────────────────────────────────── */
+.proj-year {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    color: var(--text-muted);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 20px;
+    padding: 0.2rem 0.55rem;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+    writing-mode: horizontal-tb;
+    text-align: center;
+}
+
+/* ─── Card Header Row ─────────────────────────────────────────── */
+.proj-card-header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.25rem;
+    gap: 1rem;
+}
+
+/* ─── Title & Subtitle ────────────────────────────────────────── */
+.proj-title {
+    font-family: var(--font-mono);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+    line-height: 1.3;
+}
+
+.proj-subtitle {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 400;
+    color: var(--proj-accent, var(--cyan));
+    opacity: 0.7;
+    letter-spacing: 0.03em;
+}
+
+.proj-desc {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    line-height: 1.72;
+    margin: 0.65rem 0 1rem;
+    flex: 1;
+}
+
+/* ─── Tags ────────────────────────────────────────────────────── */
+.proj-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: auto;
+}
+
+.proj-tag {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--cyan);
+    background: var(--cyan-dim);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 0.22rem 0.55rem;
+    transition: var(--transition);
+    cursor: default;
+}
+
+.proj-tag:hover {
+    background: rgba(0, 212, 255, 0.2);
+    border-color: var(--border-strong);
+    color: #fff;
+    box-shadow: 0 0 8px var(--cyan-dim);
+}
+
+/* ─── Card Stack ──────────────────────────────────────────────── */
+.proj-card-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+}
+
+/* ══════════════════════════════════════════
+   ANIMATIONS
+══════════════════════════════════════════ */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.projects-wrapper .container>* {
+    animation: fadeInUp 0.55s ease both;
+}
+
+.projects-wrapper .container>*:nth-child(1) {
+    animation-delay: 0.05s;
+}
+
+.projects-wrapper .container>*:nth-child(2) {
+    animation-delay: 0.12s;
+}
+
+.projects-wrapper .container>*:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.projects-wrapper .container>*:nth-child(4) {
+    animation-delay: 0.28s;
+}
+
+.projects-wrapper .container>*:nth-child(5) {
+    animation-delay: 0.36s;
+}
+
+/* ══════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════ */
+@media (max-width: 767.98px) {
+    .projects-wrapper {
+        padding: 3.5rem 0 4rem;
+    }
+
+    .projects-hero-title {
+        font-size: 1.9rem;
+    }
+
+    /* Stack card vertically on small screens */
+    .proj-card {
+        flex-direction: column;
+    }
+
+    .proj-card-left {
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        padding: 1rem 1.25rem;
+        min-width: unset;
+        background: rgba(0, 0, 0, 0.12);
+    }
+
+    .proj-year {
+        writing-mode: horizontal-tb;
+    }
+
+    .proj-card-body {
+        padding: 1.1rem 1.25rem 1.25rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .proj-icon-wrap {
+        width: 38px;
+        height: 38px;
+        font-size: 1rem;
+    }
+
+    .proj-title {
+        font-size: 0.95rem;
+    }
+
+    .proj-desc {
+        font-size: 0.83rem;
+    }
+}
+
+/* ─── Reduced Motion ──────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    .projects-glow-tr,
+    .projects-glow-bl,
+    .proj-card,
+    .proj-tag,
+    .proj-icon-wrap {
+        animation: none !important;
+        transition: none !important;
+    }
+}

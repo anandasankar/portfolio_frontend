@@ -1,80 +1,102 @@
 import React from "react";
 import profile from "../../assets/photo.png";
+import "./hero.css";
 
-const Hero = () => {
-  return (
-    <section
-      className="d-flex align-items-center py-5"
-      style={{ minHeight: "90vh" }}
-    >
-      <div className="container">
-        <div className="row align-items-center gy-5">
-          {/* TEXT */}
+const STACK = ["Node.js", "TypeScript", "PostgreSQL", "Redis", "AWS", "Docker"];
 
-          <div className="col-12 col-md-6 text-center text-md-start order-2 order-md-1">
-            {/* Name */}
+const Hero = () => (
+  <section className="hero-section">
+    {/* Ambient glows */}
+    <div className="hero-glow-tr"></div>
+    <div className="hero-glow-bl"></div>
 
-            <h1 className="fw-bold text-info mb-3 display-5">Hi, I'm Ananda</h1>
+    <div className="container hero-inner py-5">
+      <div className="row align-items-center gy-5">
+        {/* ── Text ── */}
+        <div className="col-12 col-md-6 text-center text-md-start order-2 order-md-1">
+          {/* Greeting */}
+          <p className="hero-greeting">// Hello, world 👋</p>
 
-            {/* Role */}
+          {/* Name */}
+          <h1 className="hero-name">
+            I'm <span className="cyan">Ananda</span>
+            <br />
+            Sankar
+          </h1>
 
-            <h4 className="mb-3 fs-4">Backend Developer</h4>
-
-            {/* Description */}
-
-            <p className="mb-4 fs-6">
-              I design and build scalable backend systems, RESTful APIs, and
-              cloud-ready applications.
-            </p>
-
-            {/* Buttons */}
-
-            <div className="d-flex flex-wrap gap-3 justify-content-center justify-content-md-start">
-              <a
-                href="mailto:anandasankar.info@gmail.com"
-                className="btn btn-info px-4 d-flex align-items-center gap-2"
-              >
-                <i className="bi bi-envelope"></i>
-                Contact
-              </a>
-
-              <a
-                href="#projects"
-                className="btn btn-outline-info px-4 d-flex align-items-center gap-2"
-              >
-                <i className="bi bi-code-slash"></i>
-                Projects
-              </a>
-
-              <a
-                href="mailto:anandasankar.info@gmail.com"
-                className="btn btn-outline-info px-4 d-flex align-items-center gap-2"
-              >
-                <i className="bi bi-download"></i>
-                Resume
-              </a>
-            </div>
+          {/* Role */}
+          <div className="hero-role">
+            <span className="hero-role-label">const role =</span>
+            <span className="hero-role-value">"Backend Developer"</span>
           </div>
 
-          {/* IMAGE */}
+          {/* Description */}
+          <p className="hero-desc">
+            I design and build{" "}
+            <span className="cyan">scalable backend systems</span>,{" "}
+            <span className="cyan">RESTful APIs</span>, and cloud-ready
+            applications that handle real-world traffic at scale.
+          </p>
 
-          <div className="col-12 col-md-6 text-center order-1 order-md-2">
-            <img
-              src={profile}
-              alt="Ananda"
-              className="img-fluid rounded-circle shadow"
-              style={{
-                width: "280px",
-                height: "280px",
-                objectFit: "cover",
-                border: "4px solid #38bdf8",
-              }}
-            />
+          {/* CTA buttons */}
+          <div className="d-flex flex-wrap gap-3 justify-content-center justify-content-md-start">
+            <a
+              href="mailto:anandasankar.info@gmail.com"
+              className="hero-btn-primary"
+            >
+              <i className="bi bi-envelope-fill"></i>
+              Contact Me
+            </a>
+            <a href="#projects" className="hero-btn-outline">
+              <i className="bi bi-code-slash"></i>
+              Projects
+            </a>
+            <a href="/resume.pdf" download className="hero-btn-outline">
+              <i className="bi bi-download"></i>
+              Resume
+            </a>
+          </div>
+
+          {/* Tech stack pills */}
+          <div className="hero-stack justify-content-center justify-content-md-start">
+            {STACK.map((tech) => (
+              <span className="hero-stack-pill" key={tech}>
+                {tech}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* ── Image ── */}
+        <div className="col-12 col-md-6 text-center order-1 order-md-2">
+          <div className="hero-img-wrap d-inline-block">
+            {/* Floating chips */}
+            <span className="hero-chip hero-chip-1">
+              <i className="bi bi-lightning-fill me-1"></i>Node.js
+            </span>
+            <span className="hero-chip hero-chip-2">
+              <i className="bi bi-cloud-fill me-1"></i>AWS
+            </span>
+            <span className="hero-chip hero-chip-3">
+              <i className="bi bi-database-fill me-1"></i>PostgreSQL
+            </span>
+
+            {/* Rings */}
+            <div className="hero-ring-outer"></div>
+            <div className="hero-ring-inner"></div>
+
+            <img src={profile} alt="Ananda Sankar" />
           </div>
         </div>
       </div>
-    </section>
-  );
-};
+    </div>
+
+    {/* Scroll hint */}
+    <div className="hero-scroll-hint">
+      <span>scroll</span>
+      <div className="hero-scroll-arrow"></div>
+    </div>
+  </section>
+);
 
 export default Hero;

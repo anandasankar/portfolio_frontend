@@ -1,113 +1,101 @@
 import React from "react";
+import "./footer.css";
 
-const Footer = () => {
-  return (
-    <footer
-      className="bg-dark text-light pt-5 pb-4 mt-5"
-      style={{
-        background: "rgba(2,6,23,0.95)",
-        fontFamily: "'JetBrains Mono', monospace",
-      }}
-    >
-      <div className="container">
-        <div className="row text-center text-md-start">
-          {/* Logo and About */}
+const NAV_LINKS = [
+  { label: "Home", href: "/" },
+  { label: "About", href: "/about" },
+  { label: "Projects", href: "/projects" },
+  { label: "Contact", href: "/contact" },
+];
 
-          <div className="col-12 col-md-4 mb-4 mb-md-0 d-flex flex-column align-items-center align-items-md-start">
-            <h5
-              className="fw-bold mb-3"
-              style={{
-                color: "#38bdf8",
-              }}
-            >
-              {"<Ananda.dev />"}
-            </h5>
+const SOCIAL_LINKS = [
+  {
+    icon: "bi-github",
+    href: "https://github.com/anandasankar",
+    label: "GitHub",
+  },
+  {
+    icon: "bi-linkedin",
+    href: "https://www.linkedin.com/in/ananda-sankar-sahoo-4239b4388",
+    label: "LinkedIn",
+  },
+  {
+    icon: "bi-envelope",
+    href: "mailto:anandasankar.info@gmail.com",
+    label: "Email",
+  },
+];
 
-            <p
-              className="text-secondary small"
-              style={{
-                maxWidth: "300px",
-              }}
-            >
-              Backend Developer experienced in building scalable APIs,
-              distributed systems, and cloud-based applications.
-            </p>
-          </div>
+const Footer = () => (
+  <footer className="site-footer pt-5 pb-4">
+    <div className="container footer-inner">
+      {/* Top gradient line */}
+      <div className="footer-top-border"></div>
 
-          {/* Quick Links */}
+      <div className="row text-center text-md-start g-4">
+        {/* ── Brand ── */}
+        <div className="col-12 col-md-4 d-flex flex-column align-items-center align-items-md-start">
+          <a href="/" className="footer-logo">
+            {"<Ananda.dev />"}
+          </a>
+          <p className="footer-tagline">
+            Backend Developer building scalable APIs, distributed systems, and
+            cloud-based applications.
+          </p>
+        </div>
 
-          <div className="col-12 col-md-4 mb-4 mb-md-0">
-            <h6 className="fw-semibold mb-3" style={{ color: "#38bdf8" }}>
-              Quick Links
-            </h6>
-
-            <div className="d-flex flex-column gap-2">
-              <a href="/" className="text-secondary text-decoration-none small">
-                Home
+        {/* ── Quick Links ── */}
+        <div className="col-12 col-md-4 d-flex flex-column align-items-center align-items-md-start">
+          <span className="footer-heading">
+            <i className="bi bi-map me-1"></i>Quick Links
+          </span>
+          <div className="d-flex flex-column gap-2">
+            {NAV_LINKS.map((link) => (
+              <a key={link.label} href={link.href} className="footer-link">
+                {link.label}
               </a>
-
-              <a
-                href="/about"
-                className="text-secondary text-decoration-none small"
-              >
-                About
-              </a>
-
-              <a
-                href="/projects"
-                className="text-secondary text-decoration-none small"
-              >
-                Projects
-              </a>
-
-              <a
-                href="/contact"
-                className="text-secondary text-decoration-none small"
-              >
-                Contact
-              </a>
-            </div>
-          </div>
-
-          {/* Connect */}
-
-          <div className="col-12 col-md-4">
-            <h6 className="fw-semibold mb-3" style={{ color: "#38bdf8" }}>
-              Connect
-            </h6>
-
-            <div className="d-flex justify-content-center justify-content-md-start gap-4">
-              <a href="#" className="text-secondary fs-5">
-                <i className="bi bi-github"></i>
-              </a>
-
-              <a href="#" className="text-secondary fs-5">
-                <i className="bi bi-linkedin"></i>
-              </a>
-
-              <a href="#" className="text-secondary fs-5">
-                <i className="bi bi-twitter-x"></i>
-              </a>
-
-              <a href="#" className="text-secondary fs-5">
-                <i className="bi bi-envelope"></i>
-              </a>
-            </div>
+            ))}
           </div>
         </div>
 
-        {/* Divider */}
-
-        <hr className="border-secondary my-4" />
-
-        {/* Bottom */}
-
-        <div className="text-center text-secondary small">
-          © {new Date().getFullYear()} Ananda Sankar | All rights reserved.
+        {/* ── Connect ── */}
+        <div className="col-12 col-md-4 d-flex flex-column align-items-center align-items-md-start">
+          <span className="footer-heading">
+            <i className="bi bi-broadcast me-1"></i>Connect
+          </span>
+          <div className="d-flex gap-3">
+            {SOCIAL_LINKS.map((s) => (
+              <a
+                key={s.label}
+                href={s.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer-social-link"
+                aria-label={s.label}
+              >
+                <i className={`bi ${s.icon}`}></i>
+              </a>
+            ))}
+          </div>
         </div>
       </div>
-    </footer>
-  );
-};
+
+      {/* ── Divider ── */}
+      <div className="footer-divider"></div>
+
+      {/* ── Bottom bar ── */}
+      <div className="d-flex flex-column flex-md-row justify-content-between align-items-center gap-2 footer-bottom">
+        <span>
+          © {new Date().getFullYear()}{" "}
+          <span className="cyan">Ananda Sankar</span> · All rights reserved.
+        </span>
+        <span className="footer-status">
+          <span className="footer-status-dot"></span>
+          Available for opportunities
+        </span>
+      </div>
+    </div>
+  </footer>
+);
 
 export default Footer;
