@@ -1,32 +1,6 @@
 import React, { useState } from "react";
 import "./contact.css";
-
-const SOCIALS = [
-  {
-    icon: "bi-github",
-    label: "GitHub",
-    value: "github.com/ananda",
-    href: "https://github.com",
-  },
-  {
-    icon: "bi-linkedin",
-    label: "LinkedIn",
-    value: "linkedin.com/in/ananda",
-    href: "https://linkedin.com",
-  },
-  {
-    icon: "bi-twitter-x",
-    label: "Twitter",
-    value: "@ananda_dev",
-    href: "https://twitter.com",
-  },
-  {
-    icon: "bi-envelope-fill",
-    label: "Email",
-    value: "ananda@example.com",
-    href: "mailto:ananda@example.com",
-  },
-];
+import { SOCIALS } from "./contactData";
 
 const Contact = () => {
   const [form, setForm] = useState({
@@ -35,7 +9,7 @@ const Contact = () => {
     subject: "",
     message: "",
   });
-  const [status, setStatus] = useState(null); // null | "sending" | "sent" | "error"
+  const [status, setStatus] = useState(null);
 
   const handleChange = (e) =>
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));

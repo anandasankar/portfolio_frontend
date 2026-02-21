@@ -1,30 +1,6 @@
 import React from "react";
 import "./footer.css";
-
-const NAV_LINKS = [
-  { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
-  { label: "Projects", href: "/projects" },
-  { label: "Contact", href: "/contact" },
-];
-
-const SOCIAL_LINKS = [
-  {
-    icon: "bi-github",
-    href: "https://github.com/anandasankar",
-    label: "GitHub",
-  },
-  {
-    icon: "bi-linkedin",
-    href: "https://www.linkedin.com/in/ananda-sankar-sahoo-4239b4388",
-    label: "LinkedIn",
-  },
-  {
-    icon: "bi-envelope",
-    href: "mailto:anandasankar.info@gmail.com",
-    label: "Email",
-  },
-];
+import { NAV_LINKS, SOCIAL_LINKS } from "./footerData";
 
 const Footer = () => (
   <footer className="site-footer pt-5 pb-4">
