@@ -100,7 +100,7 @@ const Navbar = () => {
         </ul>
 
         <a
-          href="mailto:ananda@example.com"
+          href="mailto:anandasankar.info@gmail.com"
           className="cnav__drawer-cta"
           onClick={closeMenu}
         >

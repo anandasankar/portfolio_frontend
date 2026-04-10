@@ -23,6 +23,9 @@
     --ct-radius-sm: 8px;
     --ct-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --ct-shadow: 0 4px 32px rgba(0, 0, 0, 0.55), 0 0 0 1px var(--ct-border);
+    --ct-error: #f87171;
+    --ct-error-dim: rgba(248, 113, 113, 0.12);
+    --ct-error-glow: rgba(248, 113, 113, 0.20);
 }
 
 /* ─── Wrapper ─────────────────────────────────────────────────── */
@@ -618,5 +621,52 @@
     .contact-success {
         animation: none !important;
         transition: none !important;
+    }
+}
+
+/* ══════════════════════════════════════════
+   VALIDATION — ERROR STATES
+══════════════════════════════════════════ */
+
+/* Red border + glow on error input/textarea */
+.contact-field--error .contact-field__input {
+    border-color: var(--ct-error);
+    background: var(--ct-error-dim);
+    box-shadow: 0 0 0 3px var(--ct-error-glow);
+}
+
+/* Keep red border even when focused in error state */
+.contact-field--error .contact-field__input:focus {
+    border-color: var(--ct-error);
+    box-shadow: 0 0 0 3px var(--ct-error-glow), 0 0 18px var(--ct-error-glow);
+}
+
+/* Error message */
+.contact-field__error {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-family: var(--ct-font-mono);
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    color: var(--ct-error);
+    animation: ctErrIn 0.2s ease both;
+}
+
+.contact-field__error i {
+    font-size: 0.72rem;
+    flex-shrink: 0;
+}
+
+@keyframes ctErrIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }

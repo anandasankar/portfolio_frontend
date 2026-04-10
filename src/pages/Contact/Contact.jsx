@@ -2,34 +2,84 @@ import React, { useState } from "react";
 import "./contact.css";
 import { SOCIALS } from "./contactData";
 
-const Contact = () => {
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
-  });
-  const [status, setStatus] = useState(null);
+// ── Validation ──────────────────────────────────────────────────────────────
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-  const handleChange = (e) =>
-    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+function validate(form) {
+  const errors = {};
+
+  if (!form.name.trim()) errors.name = "Name is required.";
+  else if (form.name.trim().length < 2)
+    errors.name = "Name must be at least 2 characters.";
+
+  if (!form.email.trim()) errors.email = "Email is required.";
+  else if (!EMAIL_RE.test(form.email.trim()))
+    errors.email = "Enter a valid email address.";
+
+  if (!form.subject.trim()) errors.subject = "Subject is required.";
+  else if (form.subject.trim().length < 3)
+    errors.subject = "Subject must be at least 3 characters.";
+
+  if (!form.message.trim()) errors.message = "Message is required.";
+  else if (form.message.trim().length < 10)
+    errors.message = "Message must be at least 10 characters.";
+
+  return errors;
+}
+
+// ── Component ───────────────────────────────────────────────────────────────
+const EMPTY_FORM = { name: "", email: "", subject: "", message: "" };
+
+const Contact = () => {
+  const [form, setForm] = useState(EMPTY_FORM);
+  const [errors, setErrors] = useState({});
+  const [touched, setTouched] = useState({});
+  const [status, setStatus] = useState(null); // null | "sending" | "sent"
+
+  const handleBlur = (e) => {
+    const { name } = e.target;
+    setTouched((prev) => ({ ...prev, [name]: true }));
+    setErrors(validate({ ...form }));
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    const updated = { ...form, [name]: value };
+    setForm(updated);
+    if (touched[name]) setErrors(validate(updated));
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // Touch all fields so every error becomes visible
+    setTouched({ name: true, email: true, subject: true, message: true });
+    const newErrors = validate(form);
+    setErrors(newErrors);
+    if (Object.keys(newErrors).length > 0) return; // block if invalid
+
+    // ── Dummy send — replace setTimeout with your real API call ──────
     setStatus("sending");
-    // Simulate send — replace with your real API call
     setTimeout(() => setStatus("sent"), 1800);
   };
 
+  const handleReset = () => {
+    setStatus(null);
+    setForm(EMPTY_FORM);
+    setErrors({});
+    setTouched({});
+  };
+
+  // Only show error when the field has been touched
+  const fieldError = (name) => (touched[name] && errors[name]) || null;
+
   return (
     <section className="contact-wrapper">
-      {/* Decorative bg */}
       <div className="contact-grid-bg" aria-hidden="true" />
       <div className="contact-glow-tr" aria-hidden="true" />
       <div className="contact-glow-bl" aria-hidden="true" />
 
       <div className="contact-container">
-        {/* ── Hero ───────────────────────────────────────────── */}
+        {/* ── Hero ──────────────────────────────────────────────────────── */}
         <div className="contact-hero">
           <div className="contact-badge">
             <i className="bi bi-terminal-fill" />
@@ -46,7 +96,7 @@ const Contact = () => {
 
         <div className="contact-divider" aria-hidden="true" />
 
-        {/* ── Body: left info + right form ───────────────────── */}
+        {/* ── Body ──────────────────────────────────────────────────────── */}
         <div className="contact-body">
           {/* Left — info panel */}
           <aside className="contact-info">
@@ -60,13 +110,11 @@ const Contact = () => {
                 collaborations. Let's build something great.
               </p>
 
-              {/* Availability chip */}
               <div className="contact-avail">
                 <span className="contact-avail__dot" />
                 Available for new opportunities
               </div>
 
-              {/* Socials */}
               <ul className="contact-socials">
                 {SOCIALS.map(({ icon, label, value, href }) => (
                   <li key={label}>
@@ -91,9 +139,10 @@ const Contact = () => {
             </div>
           </aside>
 
-          {/* Right — form */}
+          {/* Right — form / success */}
           <div className="contact-form-wrap">
             {status === "sent" ? (
+              /* ── Success state ──────────────────────────────────────────── */
               <div className="contact-success">
                 <div className="contact-success__icon">
                   <i className="bi bi-check-lg" />
@@ -104,18 +153,19 @@ const Contact = () => {
                 </p>
                 <button
                   className="contact-success__reset"
-                  onClick={() => {
-                    setStatus(null);
-                    setForm({ name: "", email: "", subject: "", message: "" });
-                  }}
+                  onClick={handleReset}
                 >
                   Send another
                 </button>
               </div>
             ) : (
+              /* ── Form ───────────────────────────────────────────────────── */
               <form className="contact-form" onSubmit={handleSubmit} noValidate>
+                {/* Row: Name + Email */}
                 <div className="contact-form__row">
-                  <div className="contact-field">
+                  <div
+                    className={`contact-field${fieldError("name") ? " contact-field--error" : ""}`}
+                  >
                     <label className="contact-field__label" htmlFor="name">
                       <i className="bi bi-person" /> Name
                     </label>
@@ -127,10 +177,19 @@ const Contact = () => {
                       placeholder="John Doe"
                       value={form.name}
                       onChange={handleChange}
-                      required
+                      onBlur={handleBlur}
                     />
+                    {fieldError("name") && (
+                      <span className="contact-field__error" role="alert">
+                        <i className="bi bi-exclamation-circle" />{" "}
+                        {fieldError("name")}
+                      </span>
+                    )}
                   </div>
-                  <div className="contact-field">
+
+                  <div
+                    className={`contact-field${fieldError("email") ? " contact-field--error" : ""}`}
+                  >
                     <label className="contact-field__label" htmlFor="email">
                       <i className="bi bi-envelope" /> Email
                     </label>
@@ -142,12 +201,21 @@ const Contact = () => {
                       placeholder="john@example.com"
                       value={form.email}
                       onChange={handleChange}
-                      required
+                      onBlur={handleBlur}
                     />
+                    {fieldError("email") && (
+                      <span className="contact-field__error" role="alert">
+                        <i className="bi bi-exclamation-circle" />{" "}
+                        {fieldError("email")}
+                      </span>
+                    )}
                   </div>
                 </div>
 
-                <div className="contact-field">
+                {/* Subject */}
+                <div
+                  className={`contact-field${fieldError("subject") ? " contact-field--error" : ""}`}
+                >
                   <label className="contact-field__label" htmlFor="subject">
                     <i className="bi bi-chat-left-text" /> Subject
                   </label>
@@ -159,11 +227,20 @@ const Contact = () => {
                     placeholder="Project inquiry / Just saying hi"
                     value={form.subject}
                     onChange={handleChange}
-                    required
+                    onBlur={handleBlur}
                   />
+                  {fieldError("subject") && (
+                    <span className="contact-field__error" role="alert">
+                      <i className="bi bi-exclamation-circle" />{" "}
+                      {fieldError("subject")}
+                    </span>
+                  )}
                 </div>
 
-                <div className="contact-field">
+                {/* Message */}
+                <div
+                  className={`contact-field${fieldError("message") ? " contact-field--error" : ""}`}
+                >
                   <label className="contact-field__label" htmlFor="message">
                     <i className="bi bi-pencil" /> Message
                   </label>
@@ -175,13 +252,20 @@ const Contact = () => {
                     rows={5}
                     value={form.message}
                     onChange={handleChange}
-                    required
+                    onBlur={handleBlur}
                   />
+                  {fieldError("message") && (
+                    <span className="contact-field__error" role="alert">
+                      <i className="bi bi-exclamation-circle" />{" "}
+                      {fieldError("message")}
+                    </span>
+                  )}
                 </div>
 
+                {/* Submit */}
                 <button
                   type="submit"
-                  className={`contact-submit ${status === "sending" ? "contact-submit--sending" : ""}`}
+                  className={`contact-submit${status === "sending" ? " contact-submit--sending" : ""}`}
                   disabled={status === "sending"}
                 >
                   {status === "sending" ? (

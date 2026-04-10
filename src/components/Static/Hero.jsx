@@ -15,7 +15,7 @@ const Hero = () => (
         {/* ── Text ── */}
         <div className="col-12 col-md-6 text-center text-md-start order-2 order-md-1">
           {/* Greeting */}
-          <p className="hero-greeting">// Hello, world 👋</p>
+          <p className="hero-greeting">// Hello</p>
 
           {/* Name */}
           <h1 className="hero-name">
@@ -50,10 +50,6 @@ const Hero = () => (
             <a href="#projects" className="hero-btn-outline">
               <i className="bi bi-code-slash"></i>
               Projects
-            </a>
-            <a href="/resume.pdf" download className="hero-btn-outline">
-              <i className="bi bi-download"></i>
-              Resume
             </a>
           </div>
 
