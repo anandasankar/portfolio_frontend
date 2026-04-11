@@ -1,8 +1,6 @@
-import React from "react";
 import profile from "../../assets/photo.png";
 import "./about.css";
 import { EXPERIENCES, SKILLS, STATS } from "./aboutData";
-
 
 /* ── Small reusable pieces ── */
 const Badge = ({ icon, label }) => (
@@ -43,10 +41,7 @@ const ExperienceItem = ({ exp }) => (
     <div className="about-exp-card">
       <div className="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-1">
         <div>
-          <span className="about-exp-role">
-            {exp.role}
-            {exp.current && <span className="about-current-badge">● live</span>}
-          </span>
+          <span className="about-exp-role">{exp.role}</span>
           <div className="about-exp-company mt-1">{exp.company}</div>
         </div>
         <span className="about-exp-period">
@@ -100,24 +95,32 @@ const About = () => (
 
         <div className="col-lg-8">
           <div className="about-summary-card">
-            <Badge icon="bi-terminal" label="summary.json" />
+            <Badge icon="bi-terminal" label="summary" />
             <p className="about-summary-text">
-              I'm a <span className="about-highlight">Backend Developer</span>{" "}
-              currently at{" "}
-              <span className="about-highlight">Game Mano Private Limited</span>
-              , building scalable APIs, microservices, and cloud-based backend
-              systems. With over 2+ years of experience, I specialize in
-              designing <span className="about-highlight">efficient APIs</span>,
-              caching strategies, and robust backend architectures.
+              Backend Engineer specializing in building{" "}
+              <span className="about-highlight">scalable</span>,{" "}
+              <span className="about-highlight">resilient</span>, and{" "}
+              <span className="about-highlight">high-performance systems</span>.
+              I design and develop{" "}
+              <span className="about-highlight">distributed architectures</span>
+              , RESTful APIs, and event-driven microservices that power
+              real-world applications at scale.
+            </p>
+            <p className="about-summary-text">
+              Experienced in crafting clean, maintainable code with a strong
+              focus on <span className="about-highlight">system design</span>,{" "}
+              <span className="about-highlight">performance optimization</span>,
+              and reliability. Skilled in leveraging modern backend technologies
+              to build robust{" "}
+              <span className="about-highlight">data pipelines</span>, caching
+              strategies, and{" "}
+              <span className="about-highlight">cloud-native solutions</span>.
             </p>
             <p className="about-summary-text mb-0">
-              My stack includes <span className="about-highlight">Node.js</span>
-              , <span className="about-highlight">TypeScript</span>,{" "}
-              <span className="about-highlight">PostgreSQL</span>,{" "}
-              <span className="about-highlight">Redis</span>, and{" "}
-              <span className="about-highlight">AWS</span>. I'm passionate about
-              clean architecture, performance optimization, and delivering
-              production-ready solutions that scale.
+              Passionate about solving complex engineering problems, improving
+              system efficiency, and delivering{" "}
+              <span className="about-highlight">production-grade software</span>{" "}
+              with strong architectural foundations.
             </p>
           </div>
         </div>
@@ -130,7 +133,7 @@ const About = () => (
         <div className="text-center">
           <SectionHeader
             icon="bi-code-square"
-            badgeLabel="tech.stack"
+            badgeLabel="tech stack"
             title="Technical Skills"
           />
         </div>
@@ -150,7 +153,7 @@ const About = () => (
         <div className="text-center">
           <SectionHeader
             icon="bi-briefcase"
-            badgeLabel="experience.log"
+            badgeLabel="experience"
             title="Professional Experience"
           />
         </div>

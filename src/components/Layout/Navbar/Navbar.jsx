@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import "./navbar.css";
 
 const NAV_LINKS = [
@@ -12,6 +12,7 @@ const NAV_LINKS = [
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -21,6 +22,12 @@ const Navbar = () => {
 
   const toggleMenu = () => setMenuOpen((prev) => !prev);
   const closeMenu = () => setMenuOpen(false);
+
+  const handleHireMe = () => {
+    closeMenu();
+    // Pass fromHireMe flag — Contact page reads this to auto-focus message box
+    navigate("/contact", { state: { fromHireMe: true } });
+  };
 
   return (
     <nav className={`cnav ${scrolled ? "cnav--scrolled" : ""}`}>
@@ -56,14 +63,10 @@ const Navbar = () => {
         </ul>
 
         {/* CTA */}
-        <a
-          href="mailto:ananda@example.com"
-          className="cnav__cta"
-          onClick={closeMenu}
-        >
+        <button className="cnav__cta" onClick={handleHireMe}>
           <span>Hire Me</span>
           <i className="bi bi-arrow-up-right" />
-        </a>
+        </button>
 
         {/* Hamburger */}
         <button
@@ -99,13 +102,9 @@ const Navbar = () => {
           ))}
         </ul>
 
-        <a
-          href="mailto:anandasankar.info@gmail.com"
-          className="cnav__drawer-cta"
-          onClick={closeMenu}
-        >
+        <button className="cnav__drawer-cta" onClick={handleHireMe}>
           Hire Me <i className="bi bi-arrow-up-right" />
-        </a>
+        </button>
       </div>
 
       {menuOpen && (

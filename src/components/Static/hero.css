@@ -372,3 +372,8 @@
         max-width: 100%;
     }
 }
+
+button.hero-btn-primary {
+    border: none;
+    cursor: pointer;
+}

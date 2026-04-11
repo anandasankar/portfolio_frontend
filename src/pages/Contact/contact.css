@@ -142,7 +142,7 @@
 .contact-desc {
     font-size: 1rem;
     color: var(--ct-secondary);
-    max-width: 520px;
+    max-width: 540px;
     margin: 0 auto;
     line-height: 1.75;
 }
@@ -232,7 +232,7 @@
     border: 1px solid rgba(0, 255, 204, 0.25);
     border-radius: 20px;
     padding: 0.3rem 0.85rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.1rem;
 }
 
 .contact-avail__dot {
@@ -255,6 +255,40 @@
     50% {
         opacity: 0.3;
     }
+}
+
+/* ─── Opportunity chips ───────────────────────────────────────── */
+.contact-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    margin-bottom: 1.4rem;
+}
+
+.contact-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-family: var(--ct-font-mono);
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--ct-secondary);
+    background: var(--ct-surface);
+    border: 1px solid var(--ct-border);
+    border-radius: 6px;
+    padding: 0.28rem 0.65rem;
+    transition: var(--ct-transition);
+}
+
+.contact-chip i {
+    color: var(--ct-cyan);
+    font-size: 0.62rem;
+}
+
+.contact-chip:hover {
+    border-color: var(--ct-border-s);
+    color: var(--ct-text);
 }
 
 /* ─── Socials list ────────────────────────────────────────────── */
@@ -370,6 +404,37 @@
     display: flex;
     flex-direction: column;
     gap: 1.1rem;
+}
+
+/* ─── Form heading ────────────────────────────────────────────── */
+.contact-form__heading {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--ct-font-mono);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: var(--ct-cyan);
+    margin-bottom: 0.2rem;
+}
+
+.contact-form__heading i {
+    font-size: 0.8rem;
+}
+
+/* ─── API error banner ────────────────────────────────────────── */
+.contact-form__api-error {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.82rem;
+    color: var(--ct-error);
+    background: var(--ct-error-dim);
+    border: 1px solid var(--ct-error-glow);
+    border-radius: var(--ct-radius-sm);
+    padding: 0.65rem 1rem;
+    animation: ctErrIn 0.2s ease both;
 }
 
 /* ─── Two-column row ──────────────────────────────────────────── */
@@ -628,20 +693,17 @@
    VALIDATION — ERROR STATES
 ══════════════════════════════════════════ */
 
-/* Red border + glow on error input/textarea */
 .contact-field--error .contact-field__input {
     border-color: var(--ct-error);
     background: var(--ct-error-dim);
     box-shadow: 0 0 0 3px var(--ct-error-glow);
 }
 
-/* Keep red border even when focused in error state */
 .contact-field--error .contact-field__input:focus {
     border-color: var(--ct-error);
     box-shadow: 0 0 0 3px var(--ct-error-glow), 0 0 18px var(--ct-error-glow);
 }
 
-/* Error message */
 .contact-field__error {
     display: flex;
     align-items: center;
@@ -668,5 +730,29 @@
     to {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+/* ── Hire Me highlight pulse ──────────────────────────────────── */
+.contact-field--highlight .contact-field__input {
+    border-color: var(--ct-cyan);
+    box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.15), 0 0 24px rgba(0, 212, 255, 0.12);
+    animation: ctHireHighlight 1.8s ease forwards;
+}
+
+@keyframes ctHireHighlight {
+    0% {
+        border-color: var(--ct-cyan);
+        box-shadow: 0 0 0 5px rgba(0, 212, 255, 0.30), 0 0 32px rgba(0, 212, 255, 0.25);
+    }
+
+    60% {
+        border-color: var(--ct-cyan);
+        box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.18), 0 0 20px rgba(0, 212, 255, 0.15);
+    }
+
+    100% {
+        border-color: var(--ct-border);
+        box-shadow: none;
     }
 }
