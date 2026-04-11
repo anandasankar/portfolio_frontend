@@ -130,9 +130,9 @@ const Contact = () => {
             Hire Me or <span className="contact-title--cyan">Say Hello</span>
           </h1>
           <p className="contact-desc">
-            I'm actively looking for new opportunities — full-time, contract or
-            internship. Whether you're a recruiter, a hiring manager or just
-            want to connect, my inbox is always open.
+            I'm actively looking for new opportunities — full-time. Whether
+            you're a recruiter, a hiring manager or just want to connect, my
+            inbox is always open.
           </p>
         </div>
 
